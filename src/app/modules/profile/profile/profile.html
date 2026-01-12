@@ -1,0 +1,162 @@
+<div class="container py-5">
+  <div class="row g-4">
+    
+    <div class="col-lg-4">
+      <div class="card shadow border-0 h-100">
+        <div class="card-body text-center p-4">
+          
+          <div class="avatar-circle mx-auto mb-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm">
+            <span class="display-4 fw-bold">{{ user?.fullName?.charAt(0)?.toUpperCase() }}</span>
+          </div>
+          
+          <h4 class="fw-bold mb-1">{{ user?.fullName }}</h4>
+          <p class="text-muted mb-4">{{ user?.email }}</p>
+          
+          <div class="d-flex justify-content-center gap-2 mb-4">
+            <span class="badge bg-secondary px-3 py-2">{{ user?.role }} Hesabı</span>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="text-start px-2">
+            <div class="mb-3">
+              <small class="text-muted d-block">Kullanıcı Adı</small>
+              <span class="fw-bold"><i class="fas fa-user me-2 text-primary"></i> {{ user?.username }}</span>
+            </div>
+            
+            <div class="mb-3">
+              <small class="text-muted d-block">Telefon</small>
+              <span class="fw-bold"><i class="fas fa-phone me-2 text-primary"></i> {{ user?.phone || 'Belirtilmemiş' }}</span>
+            </div>
+
+            <div class="mb-3">
+              <small class="text-muted d-block">Kayıt Tarihi</small>
+              <span class="fw-bold"><i class="fas fa-calendar-alt me-2 text-primary"></i> {{ user?.createdAt | date:'dd.MM.yyyy' }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow border-0 h-100">
+        
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+          <h5 class="mb-0 fw-bold text-primary">
+            <i class="fas fa-map-marker-alt me-2"></i> Adreslerim
+          </h5>
+          <button class="btn btn-primary btn-sm" (click)="toggleAddressForm()">
+            <i class="fas" [ngClass]="showAddressForm ? 'fa-times' : 'fa-plus'"></i> 
+            {{ showAddressForm ? 'Vazgeç' : 'Yeni Adres Ekle' }}
+          </button>
+        </div>
+
+        <div class="card-body bg-light">
+          
+          <div *ngIf="showAddressForm" class="row justify-content-center mb-4">
+            <div class="col-md-10"> <div class="card border-0 shadow-sm animate__animated animate__fadeIn">
+                <div class="card-header bg-primary text-white text-center py-2">
+                  <h6 class="mb-0 fw-bold">Yeni Adres Oluştur</h6>
+                </div>
+                <div class="card-body p-4">
+                  
+                  <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+                    <div class="row g-3">
+                      
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold">Adres Başlığı</label>
+                        <input type="text" class="form-control" formControlName="title" placeholder="Örn: Ev, İş">
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold">Şehir</label>
+                        <input type="text" class="form-control" formControlName="city" placeholder="İstanbul">
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold">İlçe</label>
+                        <input type="text" class="form-control" formControlName="district" placeholder="Kadıköy">
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold">Posta Kodu</label>
+                        <input type="text" class="form-control" formControlName="zipCode" placeholder="34000">
+                      </div>
+
+                      <div class="col-12">
+                        <label class="form-label small fw-bold">Açık Adres</label>
+                        <textarea class="form-control" formControlName="fullAddress" rows="3" placeholder="Mahalle, Cadde, Sokak, No..."></textarea>
+                      </div>
+
+                      <div class="col-12 d-grid">
+                        <button type="submit" class="btn btn-success" [disabled]="addressForm.invalid">
+                          <i class="fas fa-save me-2"></i> Kaydet
+                        </button>
+                      </div>
+
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="addresses.length === 0 && !showAddressForm" class="text-center py-5">
+            <i class="fas fa-map-marked-alt fa-3x text-muted mb-3 opacity-50"></i>
+            <p class="text-muted">Henüz kayıtlı adresiniz bulunmuyor.</p>
+          </div>
+
+         <div class="row g-3" *ngIf="!showAddressForm">
+  <div class="col-md-6" *ngFor="let addr of addresses">
+    
+    <div class="card h-100 border-0 shadow-sm address-card" 
+         [ngClass]="{'border-start border-5 border-primary': addr.isDefault}">
+      
+      <div class="card-body position-relative p-4 d-flex flex-column">
+        
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h6 class="fw-bold mb-0 text-dark">{{ addr.title }}</h6>
+          
+          <span *ngIf="addr.isDefault" class="badge bg-primary">
+            <i class="fas fa-check-circle me-1"></i> Varsayılan
+          </span>
+        </div>
+        
+        <p class="text-muted small mb-1 flex-grow-1">
+          {{ addr.fullAddress }}
+        </p>
+        <p class="fw-bold small text-dark mt-1 mb-3">
+          {{ addr.district }} / {{ addr.city }}
+        </p>
+
+        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+          
+          <button *ngIf="!addr.isDefault" 
+                  class="btn btn-sm btn-outline-primary text-decoration-none border-0 px-0" 
+                  (click)="setDefault(addr.id)">
+            <i class="fas fa-star me-1"></i> Varsayılan Yap
+          </button>
+          
+          <span *ngIf="addr.isDefault" class="text-success small fw-bold">
+             Seçili Teslimat Adresi
+          </span>
+
+          <button class="btn btn-sm btn-outline-danger border-0" 
+                  (click)="deleteAddress(addr.id)" title="Sil">
+            <i class="fas fa-trash-alt"></i> Sil
+          </button>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

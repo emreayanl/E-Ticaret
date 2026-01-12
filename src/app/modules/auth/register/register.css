@@ -1,0 +1,100 @@
+/* Login sayfasıyla aynı wrapper yapısı */
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #f8fafc;
+  padding: 30px 15px;
+}
+
+.register-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 500px; /* Form uzun olduğu için biraz daha geniş */
+  border: 1px solid #e2e8f0;
+}
+
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  background-color: #f0fff4; /* Kayıt için yeşil ton */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px auto;
+}
+
+.icon-circle i {
+  font-size: 28px;
+  color: #38a169; /* Yeşil İkon */
+}
+
+.input-group-container {
+  margin-bottom: 15px;
+}
+
+.input-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 6px;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.custom-input:focus {
+  border-color: #38a169; /* Odaklanınca Yeşil */
+  box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.15);
+}
+
+.btn-register {
+  width: 100%;
+  padding: 14px;
+  background-color: #38a169; /* Yeşil Buton */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 15px;
+}
+
+.btn-register:hover {
+  background-color: #2f855a;
+  transform: translateY(-2px);
+}
+
+.btn-register:disabled {
+  background-color: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.register-footer {
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.register-footer a {
+  color: #38a169;
+  font-weight: 600;
+  text-decoration: none;
+}

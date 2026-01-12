@@ -1,0 +1,31 @@
+<nav class="custom-navbar">
+  <div class="container main-nav-container">
+    
+    <a class="brand-area" routerLink="/">
+      <span class="brand-icon">🛍️</span> 
+      <span class="brand-text">E-Ticaret</span>
+    </a>
+
+    <div class="nav-links-area">
+      <a routerLink="/products" class="nav-item-link" routerLinkActive="active">Ürünler</a>
+
+      <ng-container *ngIf="isLoggedIn">
+        <a routerLink="/cart" class="nav-item-link" routerLinkActive="active">Sepet</a>
+        <a routerLink="/orders" class="nav-item-link" routerLinkActive="active">Siparişlerim</a>
+        <a routerLink="/profile" class="nav-item-link" routerLinkActive="active">Profil</a>
+        
+        <div class="separator" *ngIf="isAdmin"></div> 
+        <a *ngIf="isAdmin" routerLink="/admin/products" class="btn-admin">
+          <i class="fas fa-cog"></i> Yönetim Paneli
+        </a>
+
+        <button class="btn btn-danger btn-logout" (click)="onLogout()">
+          <i class="fas fa-sign-out-alt"></i> Çıkış
+        </button>
+      </ng-container>
+
+      <a *ngIf="!isLoggedIn" routerLink="/auth/login" class="btn-login-nav">Giriş Yap</a>
+      
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,97 @@
+/* Tablo Başlıkları */
+.table thead th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* Tablo Satırları */
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.table td {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Butonlar */
+.btn-outline-primary, .btn-outline-danger {
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  transition: all 0.2s;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.btn-outline-danger:hover {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+/* Rozetler (Badge) */
+.badge {
+  font-weight: 500;
+  padding: 6px 10px;
+}
+
+/* Kart Yapısı */
+.card {
+  border-radius: 12px;
+  overflow: hidden; /* Köşelerin yuvarlatılmasını korur */
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+  .table thead {
+    display: none; /* Mobilde başlıkları gizle */
+  }
+
+  .table, .table tbody, .table tr, .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .table td::before {
+    content: attr(data-label); /* data-label özelliği kullanılırsa başlık buraya gelir */
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    text-align: left;
+    font-weight: bold;
+    color: #64748b;
+  }
+
+  /* Mobilde görsel ortalansın */
+  .table td:first-child {
+    text-align: center;
+    padding-left: 0;
+  }
+}

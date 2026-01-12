@@ -1,0 +1,136 @@
+<div class="checkout-container container mt-4 mb-5">
+  <div class="row">
+    
+    <div class="col-lg-8 checkout-main">
+      
+      <div class="card shadow-sm mb-4 section-card">
+        <div class="card-header bg-white">
+          <h4 class="mb-0"><i class="fas fa-map-marker-alt text-primary"></i> Teslimat Adresi</h4>
+        </div>
+        <div class="card-body">
+          
+          <div *ngIf="addresses.length === 0" class="alert alert-warning">
+            Kayıtlı adresiniz bulunamadı. Lütfen <a routerLink="/profile">Profil</a> sayfasından adres ekleyin.
+          </div>
+
+          <div class="row" *ngIf="addresses.length > 0">
+            <div class="col-md-6 mb-3" *ngFor="let addr of addresses">
+              <div class="address-box" 
+                   [class.selected]="selectedAddressId === addr.id"
+                   (click)="selectedAddressId = addr.id">
+                
+                <div class="address-header">
+                  <span class="addr-title">{{ addr.title }}</span>
+                  <span *ngIf="addr.isDefault" class="badge bg-info">Varsayılan</span>
+                </div>
+                
+                <p class="addr-text mt-2">
+                  {{ addr.fullAddress }} <br>
+                  <strong>{{ addr.district }} / {{ addr.city }}</strong>
+                </p>
+                
+                <div class="check-icon" *ngIf="selectedAddressId === addr.id">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm section-card">
+        <div class="card-header bg-white">
+          <h4 class="mb-0"><i class="fas fa-credit-card text-primary"></i> Ödeme Yöntemi</h4>
+        </div>
+        <div class="card-body">
+          
+          <div class="payment-options">
+            <label class="payment-option" [class.active]="paymentMethod === 'CreditCard'">
+              <input type="radio" name="payment" value="CreditCard" [(ngModel)]="paymentMethod">
+              <div class="option-content">
+                <i class="fas fa-credit-card fa-2x mb-2"></i>
+                <span>Kredi / Banka Kartı</span>
+              </div>
+            </label>
+
+            <label class="payment-option" [class.active]="paymentMethod === 'CashOnDelivery'">
+              <input type="radio" name="payment" value="CashOnDelivery" [(ngModel)]="paymentMethod">
+              <div class="option-content">
+                <i class="fas fa-truck fa-2x mb-2"></i>
+                <span>Kapıda Ödeme</span>
+              </div>
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 checkout-sidebar">
+      <div class="card shadow-sm summary-card">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Sipariş Özeti</h5>
+        </div>
+        <div class="card-body">
+          
+          <div class="mini-cart-list">
+            <div class="mini-item" *ngFor="let item of displayItems">
+              <div class="item-img">
+                <img [src]="item.product.imageUrl" alt="product">
+                <span class="item-qty">{{ item.quantity }}</span>
+              </div>
+              <div class="item-info">
+                <h6>{{ item.product.name }}</h6>
+                <span class="text-muted">{{ item.totalPrice | currency:'TRY':'symbol-narrow':'1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="coupon-section mb-3">
+            <label class="small text-muted mb-1">İndirim Kuponu</label>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="KOD" 
+                     [(ngModel)]="couponCode" [disabled]="appliedCoupon !== null">
+              <button class="btn btn-outline-primary" (click)="applyCoupon()" [disabled]="appliedCoupon !== null">
+                Uygula
+              </button>
+            </div>
+            
+            <div *ngIf="couponMessage" class="mt-2 small"
+                 [ngClass]="{'text-success': couponMessageType === 'success', 'text-danger': couponMessageType === 'error'}">
+              <i class="fas" [ngClass]="{'fa-check': couponMessageType === 'success', 'fa-exclamation-circle': couponMessageType === 'error'}"></i>
+              {{ couponMessage }}
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="totals">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Ara Toplam</span>
+              <span>{{ subTotal | currency:'TRY':'symbol-narrow':'1.2-2' }}</span>
+            </div>
+            
+            <div class="d-flex justify-content-between mb-2 text-success" *ngIf="discount > 0">
+              <span>İndirim ({{ appliedCoupon?.code }})</span>
+              <span>-{{ discount | currency:'TRY':'symbol-narrow':'1.2-2' }}</span>
+            </div>
+
+            <div class="d-flex justify-content-between mt-3 total-line">
+              <span>Toplam Tutar</span>
+              <span class="total-price">{{ totalPrice | currency:'TRY':'symbol-narrow':'1.2-2' }}</span>
+            </div>
+          </div>
+
+          <button class="btn btn-success w-100 mt-4 py-3 btn-complete" (click)="completeOrder()">
+            SİPARİŞİ ONAYLA <i class="fas fa-check ms-2"></i>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

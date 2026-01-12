@@ -1,0 +1,108 @@
+<div class="container mt-5 mb-5" *ngIf="order">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <button routerLink="/orders" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left"></i> Siparişlere Dön
+    </button>
+    <h2 class="text-secondary">Sipariş #{{ order.id }}</h2>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h5 class="mb-0 text-primary">Sipariş Bilgileri</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Sipariş Tarihi:</strong> {{ order.createdAt | date:'dd.MM.yyyy HH:mm' }}</p>
+          <p>
+            <strong>Durum:</strong> 
+            <span class="badge" 
+                  [ngClass]="{
+                    'bg-warning': order.status === 'Hazırlanıyor',
+                    'bg-info': order.status === 'Kargolandı',
+                    'bg-success': order.status === 'Teslim Edildi',
+                    'bg-secondary': order.status === 'Sipariş Alındı'
+                  }">
+              {{ order.status }}
+            </span>
+          </p>
+          <p><strong>Ödeme Yöntemi:</strong> {{ order.paymentMethod === 'CreditCard' ? 'Kredi Kartı' : 'Kapıda Ödeme' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h5 class="mb-0 text-primary">Teslimat Adresi</h5>
+        </div>
+        <div class="card-body">
+          <h6 class="fw-bold">{{ order.addressSnapshot.title }}</h6>
+          <p class="mb-1">{{ order.addressSnapshot.fullAddress }}</p>
+          <p class="mb-0 fw-bold text-muted">
+            {{ order.addressSnapshot.district }} / {{ order.addressSnapshot.city }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white">
+      <h5 class="mb-0">Ürünler</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th style="width: 10%">Görsel</th>
+            <th style="width: 40%">Ürün Adı</th>
+            <th style="width: 15%">Birim Fiyat</th>
+            <th style="width: 15%">Adet</th>
+            <th style="width: 20%" class="text-end">Tutar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.items">
+            <td>
+              <img [src]="item.imageUrlSnapshot || 'assets/img/placeholder.png'" 
+                   alt="Product" 
+                   class="img-fluid rounded border" 
+                   style="width: 60px; height: 60px; object-fit: cover;">
+            </td>
+            <td>
+              <span class="fw-bold">{{ item.nameSnapshot }}</span>
+            </td>
+            <td>{{ item.priceSnapshot | currency:'TRY':'symbol-narrow':'1.2-2' }}</td>
+            <td>{{ item.quantity }} adet</td>
+            <td class="text-end fw-bold">
+              {{ (item.priceSnapshot * item.quantity) | currency:'TRY':'symbol-narrow':'1.2-2' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row justify-content-end">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Ara Toplam</span>
+            <span class="fw-bold">{{ order.subtotal | currency:'TRY':'symbol-narrow':'1.2-2' }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2 text-success" *ngIf="order.discountTotal > 0">
+            <span>İndirim ({{ order.appliedCouponCode }})</span>
+            <span>-{{ order.discountTotal | currency:'TRY':'symbol-narrow':'1.2-2' }}</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between">
+            <h5 class="mb-0">Genel Toplam</h5>
+            <h5 class="text-primary mb-0">{{ order.totalPrice | currency:'TRY':'symbol-narrow':'1.2-2' }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

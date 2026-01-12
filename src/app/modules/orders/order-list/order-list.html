@@ -1,0 +1,63 @@
+<div class="container mt-5 mb-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h2 class="section-title">
+      <i class="fas fa-box-open text-primary me-2"></i> Siparişlerim
+    </h2>
+    <span class="badge bg-light text-dark border">{{ myOrders.length }} Sipariş</span>
+  </div>
+
+  <div *ngIf="myOrders.length === 0" class="text-center py-5 empty-state">
+    <div class="mb-3">
+      <i class="fas fa-shopping-bag fa-4x text-muted"></i>
+    </div>
+    <h4>Henüz siparişiniz bulunmuyor.</h4>
+    <p class="text-muted">İhtiyacınız olan ürünleri sepetinize ekleyerek başlayabilirsiniz.</p>
+    <button routerLink="/products" class="btn btn-primary mt-3 px-4">Alışverişe Başla</button>
+  </div>
+
+  <div *ngIf="myOrders.length > 0" class="card shadow-sm border-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="py-3 ps-4">Sipariş No</th>
+            <th class="py-3">Tarih</th>
+            <th class="py-3">Durum</th>
+            <th class="py-3">Tutar</th>
+            <th class="py-3 text-end pe-4">İşlem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of myOrders">
+            <td class="ps-4 fw-bold">#{{ order.id }}</td>
+            <td>
+              <div class="d-flex flex-column">
+                <span class="fw-bold text-dark">{{ order.createdAt | date:'dd.MM.yyyy' }}</span>
+                <span class="small text-muted">{{ order.createdAt | date:'HH:mm' }}</span>
+              </div>
+            </td>
+            <td>
+              <span class="badge status-badge" 
+                [ngClass]="{
+                  'bg-warning text-dark': order.status === 'Hazırlanıyor',
+                  'bg-info text-white': order.status === 'Kargolandı',
+                  'bg-success text-white': order.status === 'Teslim Edildi',
+                  'bg-secondary text-white': order.status === 'Sipariş Alındı'
+                }">
+                {{ order.status }}
+              </span>
+            </td>
+            <td class="fw-bold text-primary">
+              {{ order.totalPrice | currency:'TRY':'symbol-narrow':'1.2-2' }}
+            </td>
+            <td class="text-end pe-4">
+              <a [routerLink]="['/orders', order.id]" class="btn btn-sm btn-outline-primary">
+                Detaylar <i class="fas fa-chevron-right ms-1"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="register-wrapper">
+  <div class="card-panel register-card animate__animated animate__fadeIn">
+    
+    <div class="register-header text-center">
+      <div class="icon-circle">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <h2>Kayıt Ol</h2>
+      <p class="text-muted">Aramıza katılmak için formu doldurun</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form mt-4">
+      
+      <div class="input-group-container">
+        <label class="input-label"><i class="fas fa-id-card"></i> Ad Soyad</label>
+        <input type="text" formControlName="fullName" class="custom-input" placeholder="Adınız Soyadınız">
+      </div>
+
+      <div class="input-group-container">
+        <label class="input-label"><i class="fas fa-user"></i> Kullanıcı Adı</label>
+        <input type="text" formControlName="username" class="custom-input" placeholder="kullaniciadi">
+      </div>
+
+      <div class="input-group-container">
+        <label class="input-label"><i class="fas fa-envelope"></i> E-posta</label>
+        <input type="email" formControlName="email" class="custom-input" placeholder="ornek@mail.com">
+      </div>
+
+      <div class="input-group-container">
+        <label class="input-label"><i class="fas fa-phone"></i> Telefon</label>
+        <input type="text" formControlName="phone" class="custom-input" placeholder="555 123 45 67">
+      </div>
+
+      <div class="input-group-container">
+        <label class="input-label"><i class="fas fa-lock"></i> Şifre</label>
+        <input type="password" formControlName="password" class="custom-input" placeholder="******">
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid" class="btn-register">
+        KAYIT OL
+      </button>
+
+      <div class="register-footer mt-3 text-center">
+        <span>Zaten hesabınız var mı? <a routerLink="/auth/login">Giriş Yap</a></span>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+/* Filtre Kartı */
+.filter-card {
+  border: none;
+  border-radius: 12px;
+  position: sticky; /* Sayfa aşağı kayınca filtre sabit kalsın istersen */
+  top: 20px;
+}
+
+/* Ürün Kartı Genel Yapısı */
+.product-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Üzerine gelince yukarı kalkma efekti */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Resim Alanı - EN ÖNEMLİ KISIM */
+.card-img-top {
+  height: 220px; /* Tüm resim kutularını aynı boya zorla */
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.card-img-top img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain; /* Resmi kesmeden kutuya sığdır */
+}
+
+/* Kart İçeriği */
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+/* Fiyat Etiketi */
+.price-tag {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0d6efd; /* Bootstrap Primary Rengi */
+}
+
+/* Yuvarlak Buton */
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,71 @@
+<div class="container py-4" *ngIf="product">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+          <h5 class="mb-0 text-primary">
+            <i class="fas fa-edit me-2"></i> Ürün Düzenle
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <form (ngSubmit)="updateProduct()" #productForm="ngForm">
+            
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Ürün Adı</label>
+                <input type="text" class="form-control" [(ngModel)]="product.name" name="name" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Marka</label>
+                <input type="text" class="form-control" [(ngModel)]="product.brand" name="brand" required>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Fiyat (TL)</label>
+                <div class="input-group">
+                  <span class="input-group-text">₺</span>
+                  <input type="number" class="form-control" [(ngModel)]="product.price" name="price" required min="0">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Stok Adedi</label>
+                <input type="number" class="form-control" [(ngModel)]="product.stock" name="stock" required min="0">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Kategori</label>
+                <select class="form-select" [(ngModel)]="product.category" name="category" required>
+                  <option value="Elektronik">Elektronik</option>
+                  <option value="Giyim">Giyim</option>
+                  <option value="Ev">Ev</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Görsel URL</label>
+                <input type="text" class="form-control" [(ngModel)]="product.imageUrl" name="imageUrl" placeholder="https://...">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Ürün Açıklaması</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="product.description" name="description" required></textarea>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" routerLink="/admin/products" class="btn btn-light px-4">İptal</button>
+              <button type="submit" class="btn btn-primary px-4" [disabled]="productForm.invalid">
+                <i class="fas fa-save me-2"></i> Güncelle
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

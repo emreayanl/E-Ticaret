@@ -1,0 +1,168 @@
+/* Genel Kapsayıcı ve Kart */
+.container {
+  max-width: 1000px;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Yumuşak gölge */
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 20px 25px;
+}
+
+.card-header h3 {
+  font-size: 1.5rem;
+  color: #334155;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tablo Düzeni */
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 15px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.table td {
+  padding: 15px;
+  vertical-align: middle; /* İçeriği dikeyde ortalar */
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Ürün Görseli ve İsmi */
+.img-thumbnail {
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 3px;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.img-thumbnail:hover {
+  transform: scale(1.05); /* Resmin üzerine gelince hafif büyür */
+}
+
+h6 {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.text-muted {
+  font-size: 0.85rem;
+}
+
+/* Adet Değiştirme Alanı (Input Group) */
+.input-group {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.input-group button {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-weight: bold;
+}
+
+.input-group button:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.input-group input {
+  border: 1px solid #e2e8f0;
+  border-left: none;
+  border-right: none;
+  font-weight: 600;
+  color: #334155;
+  background-color: #fff;
+  max-width: 50px; /* Genişliği kısıtla */
+}
+
+/* Fiyat ve Toplam Alanları */
+td.fw-bold {
+  color: #3498db; /* Ana mavi renk */
+  font-size: 1.05rem;
+}
+
+/* Silme Butonu */
+.btn-outline-danger {
+  border-color: #ffcccc;
+  color: #e53e3e;
+}
+
+.btn-outline-danger:hover {
+  background-color: #e53e3e;
+  color: white;
+  border-color: #e53e3e;
+}
+
+/* Alt Toplam ve Checkout Alanı */
+.text-end h4 {
+  font-weight: 700;
+  color: #334155;
+}
+
+.text-primary {
+  color: #3498db !important;
+}
+
+/* Ödemeye Geç Butonu */
+.btn-success {
+  background-color: #2ecc71;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); /* Yeşil gölge */
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+/* Boş Sepet İkonu */
+.fa-shopping-basket {
+  color: #cbd5e0;
+  animation: float 3s ease-in-out infinite; /* Hafif süzülme animasyonu */
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Mobilde Düzenleme */
+@media (max-width: 768px) {
+  .btn-lg {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .img-thumbnail {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}

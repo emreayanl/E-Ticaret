@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-white">
+      <h3 class="mb-0"><i class="fas fa-shopping-cart text-primary"></i> Sepetim</h3>
+    </div>
+    
+    <div class="card-body">
+      
+      <div *ngIf="displayItems.length === 0" class="text-center py-5">
+        <div class="mb-3">
+          <i class="fas fa-shopping-basket fa-3x text-muted"></i>
+        </div>
+        <h4>Sepetinizde ürün bulunmuyor.</h4>
+        <button routerLink="/products" class="btn btn-primary mt-3">Alışverişe Başla</button>
+      </div>
+
+      <div *ngIf="displayItems.length > 0">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th style="width: 40%">Ürün</th>
+                <th style="width: 15%">Fiyat</th>
+                <th style="width: 20%">Adet</th>
+                <th style="width: 15%">Toplam</th>
+                <th style="width: 10%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of displayItems">
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img [src]="item.product.imageUrl" alt="Product" 
+                         class="img-thumbnail me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <div>
+                      <h6 class="mb-0">{{ item.product.name }}</h6>
+                      <small class="text-muted">{{ item.product.brand }}</small>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ item.product.price | currency:'TRY':'symbol-narrow':'1.2-2' }}</td>
+                <td>
+                  <div class="input-group input-group-sm" style="width: 100px;">
+                    <button class="btn btn-outline-secondary" (click)="updateQuantity(item.product.id, -1)">-</button>
+                    <input type="text" class="form-control text-center" [value]="item.quantity" readonly>
+                    <button class="btn btn-outline-secondary" (click)="updateQuantity(item.product.id, 1)">+</button>
+                  </div>
+                </td>
+                <td class="fw-bold">{{ item.totalPrice | currency:'TRY':'symbol-narrow':'1.2-2' }}</td>
+                <td>
+                  <button (click)="removeItem(item.product.id)" class="btn btn-sm btn-outline-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <button (click)="clearCart()" class="btn btn-outline-secondary">
+              <i class="fas fa-trash-alt me-2"></i> Sepeti Temizle
+            </button>
+          </div>
+          <div class="col-md-6 text-end">
+            <h4 class="mb-3">Genel Toplam: <span class="text-primary">{{ cartTotal | currency:'TRY':'symbol-narrow':'1.2-2' }}</span></h4>
+            <button (click)="goToCheckout()" class="btn btn-success btn-lg px-5">
+              Ödemeye Geç <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

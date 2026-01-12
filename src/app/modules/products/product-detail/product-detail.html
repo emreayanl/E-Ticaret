@@ -1,0 +1,75 @@
+<div class="container py-5">
+  
+  <div *ngIf="!product" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Yükleniyor...</span>
+    </div>
+  </div>
+
+  <div *ngIf="product" class="row justify-content-center animate__animated animate__fadeIn">
+    
+    <div class="col-md-6 mb-4">
+      <div class="product-image-container shadow-sm">
+        <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="product-info ps-md-4">
+        
+        <div class="mb-2">
+          <span class="badge bg-secondary me-2">{{ product.category }}</span>
+          <span class="text-muted text-uppercase fw-bold">{{ product.brand }}</span>
+        </div>
+
+        <h1 class="display-6 fw-bold text-dark mb-3">{{ product.name }}</h1>
+
+        <div class="price-tag mb-3">
+          {{ product.price | currency:'TRY':'symbol-narrow':'1.2-2' }}
+        </div>
+
+        <div class="mb-4">
+          <span *ngIf="product.stock > 0" class="text-success fw-bold">
+            <i class="fas fa-check-circle"></i> Stokta Var ({{ product.stock }} adet)
+          </span>
+          <span *ngIf="product.stock === 0" class="text-danger fw-bold">
+            <i class="fas fa-times-circle"></i> Stok Tükendi
+          </span>
+        </div>
+
+        <p class="text-muted mb-4 description-text">
+          {{ product.description }}
+        </p>
+
+        <hr>
+
+        <div class="action-area d-flex align-items-center gap-3 mt-4">
+          
+          <div class="quantity-selector input-group" *ngIf="product.stock > 0">
+            <button class="btn btn-outline-secondary" (click)="decreaseQuantity()" [disabled]="quantity <= 1">
+              <i class="fas fa-minus"></i>
+            </button>
+            <input type="text" class="form-control text-center fw-bold" [value]="quantity" readonly style="max-width: 60px;">
+            <button class="btn btn-outline-secondary" (click)="increaseQuantity()" [disabled]="quantity >= product.stock">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          <button class="btn btn-primary btn-lg flex-grow-1" 
+                  (click)="addToCart()" 
+                  [disabled]="product.stock === 0">
+            <i class="fas fa-shopping-cart me-2"></i> 
+            {{ product.stock > 0 ? 'Sepete Ekle' : 'Tükendi' }}
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <a routerLink="/products" class="text-decoration-none text-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Ürünlere Dön
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

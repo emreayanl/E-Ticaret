@@ -1,0 +1,17 @@
+/* src/styles.css */
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif; /* Yazı tipi */
+    background-color: #f8f9fa; /* Hafif gri arka plan */
+    margin: 0;
+    padding-bottom: 50px;
+}
+
+/* Linklerin alt çizgisini kaldır */
+a {
+    text-decoration: none;
+}
+
+/* Kartlar için genel gölge efekti */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}

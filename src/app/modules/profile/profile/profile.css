@@ -1,0 +1,86 @@
+/* Profil Avatarı */
+.avatar-circle {
+  width: 100px;
+  height: 100px;
+  background-color: #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a5568;
+  font-size: 2.5rem;
+  font-weight: 700;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Sol Menü Butonları */
+.profile-card .btn-light {
+  text-align: left;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  background-color: transparent;
+}
+
+.profile-card .btn-light:hover {
+  background-color: #f7fafc;
+  color: #3498db;
+}
+
+.profile-card .btn-light.active {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  border-left: 4px solid #3498db;
+  font-weight: 600;
+}
+
+/* Adres Kartları */
+.address-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.address-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+.address-card.border-primary {
+  background-color: #fbfdff;
+  border-width: 2px;
+}
+
+/* Form Alanı */
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #cbd5e0;
+  padding: 10px 12px;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Animasyon */
+.animate__fadeIn {
+  animation-duration: 0.5s;
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+  .col-lg-4 {
+    margin-bottom: 30px;
+  }
+  
+  .address-card {
+    margin-bottom: 15px;
+  }
+}
